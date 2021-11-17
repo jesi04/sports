@@ -3,10 +3,7 @@ package hu.sports.controller;
 import hu.sports.domain.Athlete;
 import hu.sports.service.AthleteService;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,8 +23,15 @@ public class AthleteController {
 
     @PostMapping("/athletes")
     @ResponseStatus(HttpStatus.CREATED)
-    public List<Athlete> postAthletes(){
-        return service.postAthletes();
+    public Athlete postAthletes(@RequestBody Athlete athlete){
+        return service.postAthletes(athlete);
     }
+
+    @PutMapping("/athletes/{id}")
+    public Athlete putAthlete(@PathVariable("id") int id, @RequestBody Athlete athlete){
+        return service.putAthlete(id, athlete);
+    }
+
+
 
 }
